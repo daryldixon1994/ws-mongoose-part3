@@ -1,5 +1,5 @@
 const connect = require("./connect");
-const Session = require("./models/Session");
+// const Session = require("./models/Session");
 const app = require("express")();
 const User = require("./models/User");
 connect();
@@ -7,20 +7,20 @@ connect();
 const createUser = async () => {
   try {
     await User.create({
-      firstName: "Ansu",
-      lastName: "Fati",
-      userName: "annsuBarca10",
-      email: "ansu@gmail.com",
+      firstName: "Mario",
+      lastName: "Paulista",
+      userName: "julioBarca10",
+      email: "mario@gmail.com",
       phone: "111111111",
       password: "Barça1234",
     });
-    console.log("User was created");
+    
   } catch (error) {
     console.log(error.message);
   }
 };
 
-// createUser();
+createUser();
 
 const getUsers = async () => {
   try {
@@ -72,14 +72,20 @@ const getSessions = async () => {
     console.log(error.message);
   }
 };
-getSessions();
-app.get("/", async (req, res) => {
-  try {
-    const data = await Session.find().populate("users");
-    // console.log(data);
-    res.json({ data });
-  } catch (error) {
-    console.log(error.message);
-  }
-});
-app.listen(5000);
+// getSessions();
+// app.get("/", async (req, res) => {
+//   try {
+//     const data = await Session.find().populate("users");
+//     // console.log(data);
+//     res.json({ data });
+//   } catch (error) {
+//     console.log(error.message);
+//   }
+// });
+// app.listen(5000);
+
+// mongoose middleware :
+// Document middlewares : save, remove, validate
+// Query middlewares: find, findOne, updateOne, updateMany....
+
+// pre middleware : 

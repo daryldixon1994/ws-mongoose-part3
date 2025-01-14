@@ -7,7 +7,7 @@ const userSchema = new Schema(
     firstName: {
       type: String,
       required: [true, "Firstname is required"],
-      minLength: [4, "Minumum 4 characters is required"],
+      minLength: [3, "Minumum 3 characters is required"],
       trim: true,
     },
     lastName: {
@@ -18,9 +18,6 @@ const userSchema = new Schema(
     },
     phone: {
       type: String,
-      set: function (v) {
-        return `+216 ${v}`;
-      },
       immutable: true,
     },
     userName: {
@@ -76,5 +73,16 @@ const userSchema = new Schema(
     toObject: { getters: true },
   }
 );
+
+userSchema.pre("save", function (next) {
+  this.phone = `+216 ${this.phone}`
+  console.log("User schema pre middleware is triggered");
+  next();
+});
+
+userSchema.post("save", (docs) => {
+  console.log(docs);
+  console.log("User was created");
+});
 
 module.exports = User = mongoose.model("User", userSchema);
